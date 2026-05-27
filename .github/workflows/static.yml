@@ -28,7 +28,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: 
-      group: default26
+      group:  default26
       labels: plainr26-runner1
     steps:
       - name: Checkout
