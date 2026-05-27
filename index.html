@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plainr | Agentic OS for the Physical Economy</title>
+  
+  <!-- SEO Best Practices -->
+  <meta name="description" content="Defending operator margins and neutralizing upstream supply chain contagion in real-time. Discover Plainr Sentinel, the world's first Agentic OS built for physical economy operators.">
+  <meta name="keywords" content="supply chain, risk management, manufacturing, logistics, agentic AI, margin protection, EBITDA, GICS, NAICS">
+  <meta name="author" content="Plainr">
+  
+  <!-- Premium Typography: Google Fonts (Outfit & Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Clean CSS Reset & Variables */
+    :root {
+      /* Brand Palette */
+      --primary-dark: #1E1B4B;  /* Deep Indigo header */
+      --primary: #2E1065;       /* Main Purple */
+      --primary-light: #581C87; /* Subtitle background */
+      --accent: #6366F1;        /* Electric Indigo */
+      --accent-hover: #4F46E5;
+      
+      /* Risk Tiers Palette */
+      --tier4-red: #EF4444;     /* Red (Tier 4 Risks) */
+      --tier3-violet: #8B5CF6;  /* Violet (Tier 3 Risks) */
+      --tier2-magenta: #D946EF; /* Magenta (Tier 2 Risks) */
+      --tier1-purple: #6366F1;  /* Purple/Indigo (Tier 1 Risks) */
+      
+      /* UI Colors */
+      --bg-canvas: #F1F5F9;     /* Light gray desk surface for page container */
+      --bg-card: #FFFFFF;       /* Pure white page sheet */
+      --text-dark: #0F172A;     /* Off-black for crisp reading */
+      --text-muted: #334155;    /* Slate-700 for descriptions */
+      --text-light: #64748B;    /* Slate-500 */
+      --border-color: #E2E8F0;  /* Slate-200 */
+      
+      /* Sheet Dimensions (A4 Ratio) */
+      --sheet-width: 840px;
+      --sheet-padding: 36px;
+      
+      /* Card Shadow */
+      --shadow-premium: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dark Mode variables override */
+    body.dark-mode {
+      --bg-canvas: #0F172A;
+      --bg-card: #1E293B;
+      --text-dark: #F8FAFC;
+      --text-muted: #E2E8F0;
+      --text-light: #94A3B8;
+      --border-color: #334155;
+      --shadow-premium: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: var(--bg-canvas);
+      color: var(--text-dark);
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 10px;
+      min-height: 100vh;
+      transition: var(--transition-smooth);
+    }
+
+    /* Floating control bar for active demonstration */
+    .controls-bar {
+      position: sticky;
+      top: 20px;
+      z-index: 100;
+      display: flex;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      padding: 10px 18px;
+      border-radius: 9999px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.15);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      margin-bottom: 30px;
+      align-items: center;
+      transition: var(--transition-smooth);
+    }
+    
+    body.dark-mode .controls-bar {
+      background: rgba(30, 41, 59, 0.85);
+      border-color: rgba(51, 65, 85, 0.8);
+    }
+
+    .btn-toggle {
+      background: none;
+      border: none;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+      color: var(--text-muted);
+    }
+
+    .btn-toggle.active, .btn-toggle:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Premium Sheet Container matching original layout perfectly */
+    .one-pager-container {
+      width: var(--sheet-width);
+      min-height: 1100px;
+      background-color: var(--bg-card);
+      border-radius: 12px;
+      box-shadow: var(--shadow-premium);
+      padding: var(--sheet-padding);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      transition: var(--transition-smooth);
+    }
+
+    /* Print-specific layout override */
+    body.print-mode {
+      background-color: #FFFFFF;
+      padding: 0;
+    }
+
+    body.print-mode .controls-bar {
+      display: none;
+    }
+
+    body.print-mode .one-pager-container {
+      width: 100%;
+      max-width: 800px;
+      box-shadow: none;
+      border: none;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    /* --- TOP BANNER (Header Block) --- */
+    .header-banner {
+      background-color: var(--primary-dark);
+      padding: 16px 28px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+    }
+
+    .brand-logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Plainr Interactive SVG Logo */
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      fill: none;
+      stroke: #FFFFFF;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .brand-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+    }
+
+    .header-title-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.95;
+    }
+
+    /* --- MAIN TITLE BLOCK --- */
+    .title-block {
+      text-align: center;
+      margin-bottom: 20px;
+      padding: 0 10px;
+    }
+
+    .title-block h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 25px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.3;
+      letter-spacing: -0.5px;
+    }
+
+    /* --- EXECUTIVE SUMMARY BAR --- */
+    .section-bar-header {
+      background-color: var(--primary-light);
+      padding: 8px 18px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    .section-bar-header h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* --- UPPER SPLIT SECTION --- */
+    .top-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+
+    .executive-summary-text {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      text-align: justify;
+    }
+
+    .executive-summary-text p {
+      margin-bottom: 12px;
+    }
+
+    .bold-highlight {
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    /* --- INTERACTIVE SVG CASCADE DIAGRAM --- */
+    .diagram-container {
+      background-color: rgba(248, 250, 252, 0.5);
+      border: 1px dashed var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: var(--transition-smooth);
+    }
+    
+    body.dark-mode .diagram-container {
+      background-color: rgba(30, 41, 59, 0.3);
+    }
+
+    .diagram-title {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    /* Embedded high-fidelity SVG diagram */
+    .cascade-svg {
+      width: 100%;
+      max-width: 340px;
+      height: auto;
+    }
+
+    .node-pill {
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .node-pill:hover {
+      filter: brightness(1.15) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    }
+
+    .svg-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 8px;
+      fill: #FFFFFF;
+      pointer-events: none;
+    }
+
+    .svg-desc {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 7px;
+      fill: #FFFFFF;
+      pointer-events: none;
+      opacity: 0.95;
+    }
+
+    /* Interactive risk popup */
+    .risk-tooltip-card {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translate(-50%, 20px) scale(0.95);
+      background: var(--primary-dark);
+      border: 1px solid var(--accent);
+      color: #FFFFFF;
+      padding: 12px 16px;
+      border-radius: 8px;
+      width: 90%;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-smooth);
+      z-index: 20;
+    }
+
+    .risk-tooltip-card.active {
+      opacity: 1;
+      transform: translate(-50%, 0) scale(1);
+      pointer-events: auto;
+    }
+
+    .risk-tooltip-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .risk-tooltip-close {
+      cursor: pointer;
+      font-size: 14px;
+      padding: 0 4px;
+    }
+
+    .risk-tooltip-desc {
+      font-size: 11.5px;
+      line-height: 1.4;
+      color: #E2E8F0;
+    }
+
+    /* Mid-block callout positioned identically to original */
+    .mid-statement-callout {
+      text-align: right;
+      padding: 0 10px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: var(--text-muted);
+      border-right: 4px solid var(--accent);
+      padding-right: 18px;
+    }
+
+    .mid-statement-callout p {
+      margin-bottom: 4px;
+    }
+
+    /* --- SECTION SEPARATORS --- */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border-color) 15%, var(--border-color) 85%, transparent);
+      margin: 16px 0;
+      border: none;
+    }
+
+    /* --- BOTTOM GRID SECTION (Two Columns) --- */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      flex-grow: 1;
+    }
+
+    .left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Typography inside grid content */
+    .lead-paragraph-accent {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      background-color: rgba(99, 102, 241, 0.04);
+      padding: 12px 16px;
+      border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .col-section-header {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .bullet-item {
+      position: relative;
+      padding-left: 18px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .bullet-item::before {
+      content: "•";
+      position: absolute;
+      left: 2px;
+      top: -2px;
+      color: var(--accent);
+      font-size: 18px;
+    }
+
+    /* Interactive Calculator Styling */
+    .calculator-widget {
+      background-color: rgba(15, 23, 42, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    body.dark-mode .calculator-widget {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .calc-slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .calc-slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .calc-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 9999px;
+      background: var(--border-color);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .calc-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      box-shadow: 0 0 6px rgba(99, 102, 241, 0.5);
+      transition: var(--transition-smooth);
+    }
+
+    .calc-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .calc-metrics-container {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 10px;
+      margin-top: 6px;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 10px;
+    }
+
+    .calc-metric-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 6px 10px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    .calc-metric-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    
+    .calc-metric-value.exposure {
+      color: var(--tier4-red);
+    }
+
+    .calc-metric-title {
+      font-size: 8.5px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-top: 2px;
+    }
+
+    /* Contact Block */
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .contact-line {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    .contact-line a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+    }
+
+    .contact-line a:hover {
+      text-decoration: underline;
+      color: var(--accent-hover);
+    }
+
+    /* --- FOOTER BANNER --- */
+    .one-pager-footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+      margin-top: 28px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .footer-text {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+    }
+
+    /* Animations helper classes */
+    @keyframes pulse-lightning {
+      0%, 100% { filter: drop-shadow(0 0 2px rgba(239, 68, 68, 0.4)); opacity: 1; }
+      50% { filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.8)); opacity: 0.85; }
+    }
+    
+    .pulsing-lightning {
+      animation: pulse-lightning 2s infinite ease-in-out;
+    }
+
+    /* Print styling rules */
+    @media print {
+      body {
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
+        padding: 0 !important;
+      }
+      
+      .controls-bar {
+        display: none !important;
+      }
+      
+      .one-pager-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        background-color: #FFFFFF !important;
+      }
+
+      .diagram-container {
+        background-color: #FFFFFF !important;
+        border: 1px solid #CCCCCC !important;
+      }
+
+      .calculator-widget {
+        background-color: #FFFFFF !important;
+        border: 1px solid #CCCCCC !important;
+      }
+
+      .calc-metric-box {
+        background-color: #FFFFFF !important;
+        border: 1px solid #CCCCCC !important;
+      }
+
+      .btn-toggle {
+        display: none !important;
+      }
+
+      .bullet-item::before {
+        color: #000000 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FLOATING CONTROLS FOR SESSION PREVIEW -->
+  <div class="controls-bar" id="controls">
+    <div style="font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-right: 8px;">Interactive Demo:</div>
+    <button class="btn-toggle active" id="btn-digital" onclick="setMode('digital')">Digital Interactive</button>
+    <button class="btn-toggle" id="btn-print" onclick="setMode('print')">Print Preview (A4)</button>
+    <div style="width: 1px; height: 16px; background-color: var(--border-color);"></div>
+    <button class="btn-toggle" id="btn-dark" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+  </div>
+
+  <!-- THE MAIN SHEET CONTAINER -->
+  <main class="one-pager-container" id="one-pager">
+    
+    <!-- TOP BANNER (LOGO & TITLE BANNER) -->
+    <header class="header-banner">
+      <div class="brand-logo-container" style="display: flex; align-items: center; height: 32px;">
+        <!-- High-fidelity White Logo processed directly from official asset -->
+        <img src="logo_full.png" alt="Plainr Logo" style="height: 32px; width: auto; object-fit: contain; display: block;" />
+      </div>
+      <div class="header-title-text">
+        Agentic OS for the Physical Economy
+      </div>
+    </header>
+
+    <!-- TITLE BLOCK -->
+    <section class="title-block">
+      <h1>Defending Operator Margins and Neutralizing Upstream<br>Supply Chain Contagion in Real-Time</h1>
+    </section>
+
+    <!-- EXECUTIVE SUMMARY SUBTITLE HEADER -->
+    <div class="section-bar-header">
+      <h2>Executive Summary</h2>
+    </div>
+
+    <!-- UPPER GRID (TEXT & INTERACTIVE DIAGRAM) -->
+    <section class="top-grid">
+      <div class="executive-summary-text">
+        <p>
+          For physical economy operators, supply chain disruptions do not happen on a spreadsheet - they happen in the physical world. Static risk databases and delayed quarterly reports create a <span class="bold-highlight">60-Day Visibility Gap</span> between an upstream incident (e.g., component shortages, labor strikes, physical climate events) and the resulting margin erosion on the balance sheet.
+        </p>
+        <p style="margin-top: 16px;">
+          Plainr is the world's first Agentic OS specifically built to close this gap. By <span class="bold-highlight">mapping the physical economy</span> as an active, interconnected ledger, Plainr helps manufacturers <span class="bold-highlight">identify, track, and actively neutralize upstream contagion risks</span> before they impact margins and revenues.
+        </p>
+      </div>
+
+      <!-- INTERACTIVE CASCADE DIAGRAM -->
+      <div class="diagram-container">
+        <div class="diagram-title">Supply Chain Disruption Cascade (Click any Tier)</div>
+        
+        <!-- Vector-based high-fidelity SVG recreated from reference image -->
+        <svg class="cascade-svg" viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
+          <!-- Connective background arrows -->
+          <g stroke="var(--border-color)" stroke-width="1.5" fill="none">
+            <line x1="45" y1="110" x2="90" y2="110" stroke-dasharray="2 2"></line>
+            <!-- Vertical flow arrow behind cards -->
+            <line x1="145" y1="15" x2="145" y2="155"></line>
+            <!-- Downstream Impact Arrow pointing to lightning bolt -->
+            <path d="M 200 65 L 215 65 L 215 90 L 210 90" marker-end="url(#arrow)" stroke="#EF4444" stroke-width="1.5"></path>
+            <path d="M 200 110 L 215 110 L 215 90 L 210 90" stroke="#EF4444" stroke-width="1.5"></path>
+          </g>
+
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#EF4444"></path>
+            </marker>
+          </defs>
+
+          <!-- Factory Vector Icon Group (Left Side) -->
+          <g id="factory-icon-group" transform="translate(10, 35)">
+            <!-- Ground -->
+            <line x1="0" y1="55" x2="70" y2="55" stroke="var(--text-light)" stroke-width="1.5"></line>
+            
+            <!-- Factory outline -->
+            <path d="M 5 55 L 5 35 L 20 25 L 20 35 L 35 25 L 35 35 L 50 25 L 50 55 Z" fill="none" stroke="var(--text-muted)" stroke-width="1.5" stroke-linejoin="round"></path>
+            
+            <!-- Smokestacks -->
+            <line x1="12" y1="25" x2="12" y2="15" stroke="var(--text-muted)" stroke-width="1.5"></line>
+            <line x1="28" y1="25" x2="28" y2="15" stroke="var(--text-muted)" stroke-width="1.5"></line>
+            <line x1="43" y1="25" x2="43" y2="12" stroke="var(--text-muted)" stroke-width="1.5"></line>
+            
+            <!-- Cargo Ship Silhouette -->
+            <path d="M 45 55 L 68 55 L 63 48 L 48 48 Z" fill="none" stroke="var(--text-muted)" stroke-width="1.5" stroke-linejoin="round"></path>
+            
+            <!-- Overlay warning circles (Risk Indicator) -->
+            <circle cx="35" cy="40" r="10" stroke="#EF4444" stroke-width="1" fill="#EF4444" fill-opacity="0.1" class="pulsing-lightning"></circle>
+            <path d="M 35 34 L 35 42 M 35 45 L 35 46" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"></path>
+            
+            <!-- Incident Text -->
+            <text x="35" y="5" font-family="Inter" font-weight="700" font-size="5.5" fill="var(--text-dark)" text-anchor="middle">Upstream Incident e.g.,</text>
+            <text x="35" y="11" font-family="Inter" font-weight="700" font-size="5.5" fill="var(--text-dark)" text-anchor="middle">Component Shortage, Port Strike</text>
+          </g>
+
+          <!-- STACKED RISK TIERS (Rounded pills recreated in native SVG) -->
+          <!-- Tier 4: Commodities -->
+          <g class="node-pill" id="tier-4" onclick="showRisk('tier4')">
+            <rect x="90" y="15" width="110" height="24" rx="12" fill="#EF4444"></rect>
+            <text class="svg-text" x="145" y="27" text-anchor="middle">Tier 4 Risks</text>
+            <text class="svg-desc" x="145" y="34" text-anchor="middle">Commodities</text>
+          </g>
+
+          <!-- Tier 3: Processors -->
+          <g class="node-pill" id="tier-3" onclick="showRisk('tier3')">
+            <rect x="90" y="60" width="110" height="24" rx="12" fill="#8B5CF6"></rect>
+            <text class="svg-text" x="145" y="72" text-anchor="middle">Tier 3 Risks</text>
+            <text class="svg-desc" x="145" y="79" text-anchor="middle">Processors</text>
+          </g>
+
+          <!-- Tier 2: Materials -->
+          <g class="node-pill" id="tier-2" onclick="showRisk('tier2')">
+            <rect x="90" y="105" width="110" height="24" rx="12" fill="#D946EF"></rect>
+            <text class="svg-text" x="145" y="117" text-anchor="middle">Tier 2 Risks</text>
+            <text class="svg-desc" x="145" y="124" text-anchor="middle">Materials</text>
+          </g>
+
+          <!-- Tier 1: OEMs -->
+          <g class="node-pill" id="tier-1" onclick="showRisk('tier1')">
+            <rect x="90" y="150" width="110" height="24" rx="12" fill="#6366F1"></rect>
+            <text class="svg-text" x="145" y="162" text-anchor="middle">Tier 1 Risks</text>
+            <text class="svg-desc" x="145" y="169" text-anchor="middle">OEMs / Brands</text>
+          </g>
+
+          <!-- Lightning bolt on the right (Downstream margin impact) -->
+          <g transform="translate(210, 75)" class="pulsing-lightning">
+            <!-- Red stylized lightning bolt path -->
+            <path d="M 12 0 L 2 16 L 9 16 L 5 30 L 16 12 L 9 12 Z" fill="#EF4444" stroke="#EF4444" stroke-width="1"></path>
+            <!-- Downstream Alert Text -->
+            <text x="10" y="-12" font-family="Inter" font-weight="700" font-size="5" fill="#EF4444" text-anchor="middle">Downstream</text>
+            <text x="10" y="-7" font-family="Inter" font-weight="700" font-size="5" fill="#EF4444" text-anchor="middle">margin and</text>
+            <text x="10" y="-2" font-family="Inter" font-weight="700" font-size="5" fill="#EF4444" text-anchor="middle">revenue felt</text>
+            <text x="10" y="3" font-family="Inter" font-weight="700" font-size="5" fill="#EF4444" text-anchor="middle">acutely at Tier 1</text>
+          </g>
+        </svg>
+
+        <!-- Hidden Popover for interactive risk exploration -->
+        <div class="risk-tooltip-card" id="risk-card">
+          <div class="risk-tooltip-title">
+            <span id="risk-title-text">Tier 4 Risks Selected</span>
+            <span class="risk-tooltip-close" onclick="closeRiskCard()">×</span>
+          </div>
+          <p class="risk-tooltip-desc" id="risk-desc-text">Select a tier from the diagram to view detailed upstream manufacturing risk impacts.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION SEPARATOR -->
+    <hr class="section-divider">
+
+    <!-- BOTTOM GRID LAYOUT (TWO SYMMETRICAL COLUMNS) -->
+    <section class="bottom-grid">
+      
+      <!-- LEFT COLUMN (TRACTION & COLLABORATION) -->
+      <div class="left-col">
+        <!-- Lead statement positioned at top left -->
+        <div class="lead-paragraph-accent">
+          Plainr moves past passive data-gathering and static dashboards to <strong>active, agentic execution</strong>. Through our enterprise-grade platform, we equip manufacturers with a <strong>live, real-time operating dashboard</strong> to defend both sides of the ledger.
+        </div>
+
+        <!-- Section: Traction -->
+        <div>
+          <h3 class="col-section-header">
+            <!-- Direct Icon representation -->
+            <svg style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2.5" viewBox="0 0 24 24">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            Proven Traction & Validation
+          </h3>
+          <ul class="bullet-list">
+            <li class="bullet-item">
+              <strong>Currently onboarding a $1.5 Billion Revenue Global Food Manufacturer:</strong> Tracing complex supplier matrix configurations to safeguard multi-million dollar food processing contracts.
+            </li>
+            <li class="bullet-item">
+              <strong>Approved UiPath Marketplace Vendor (Silver Certified Partner):</strong> Enabling seamless enterprise compliance, automated remediation playbook triggers, and IT department approval.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Section: Collaboration -->
+        <div>
+          <h3 class="col-section-header">
+            <svg style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2.5" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            Collaboration with Manufacturing Institutes
+          </h3>
+          <ul class="bullet-list">
+            <li class="bullet-item">
+              <strong>Member Pilot Program Cohorts:</strong> We offer structured, subsidized 90-day pilot cohorts for manufacturing institute member companies to demonstrate immediate, measurable margin-protection.
+            </li>
+            <li class="bullet-item">
+              <strong>Joint Innovation Initiatives:</strong> Collaborative research, case-studies, and white papers detailing physical economy contagion risk, sector-level exposure modeling, and autonomous risk-mitigation.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN (CAPABILITIES & CONTACT) -->
+      <div class="right-col">
+        
+        <!-- Section: Capabilities -->
+        <div>
+          <h3 class="col-section-header">
+            <svg style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2.5" viewBox="0 0 24 24">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+            Core Platform Capabilities
+          </h3>
+          <ul class="bullet-list">
+            <li class="bullet-item">
+              <strong>Dynamic Upstream Mapping:</strong> Traces physical, environmental, and labor risks from Tier 4 through Tier 2, mapping exact contagion paths directly to products and product lines.
+            </li>
+            <li class="bullet-item">
+              <strong>Agentic Mitigation Simulator:</strong> Recommends specific, prescriptive alternative sourcing and logistically re-routes supplier paths, instantly modeling the EBITDA impact of supply shifts.
+              
+              <!-- INTERACTIVE SIMULATOR CARD -->
+              <div class="calculator-widget">
+                <div style="font-family: 'Outfit', sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--accent); text-align: center; border-bottom: 1px solid var(--border-color); padding-bottom: 4px;">
+                  Interactive Margin Simulator
+                </div>
+                
+                <!-- Spend Slider -->
+                <div class="calc-slider-group">
+                  <div class="calc-slider-labels">
+                    <span>Annual Supplier Spend ($M)</span>
+                    <span id="spend-val" style="color: var(--accent); font-weight: 700;">$100M</span>
+                  </div>
+                  <input type="range" min="1" max="1000" value="100" class="calc-slider" id="spend-slider" oninput="calculateMargin()">
+                </div>
+
+                <!-- Disruption Slider -->
+                <div class="calc-slider-group">
+                  <div class="calc-slider-labels">
+                    <span>Days of Raw Material Interruption</span>
+                    <span id="days-val" style="color: var(--accent); font-weight: 700;">60 Days</span>
+                  </div>
+                  <input type="range" min="5" max="120" value="60" class="calc-slider" id="days-slider" oninput="calculateMargin()">
+                </div>
+
+                <!-- Metrics Output -->
+                <div class="calc-metrics-container">
+                  <div class="calc-metric-box">
+                    <div class="calc-metric-value exposure" id="exposure-val">$3.00M</div>
+                    <div class="calc-metric-title">EBITDA Risk Exposure</div>
+                  </div>
+                  <div class="calc-metric-box" style="border-color: var(--accent); background: rgba(99, 102, 241, 0.02);">
+                    <div class="calc-metric-value" id="saved-val">$2.55M</div>
+                    <div class="calc-metric-title">Margin Protected by Plainr</div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="bullet-item">
+              <strong>Real-Time Geospatial Pulse:</strong> Monitors localized physical, credit, and labor disruptions at specific supplier geo-locations to flag bottlenecks 60 days before P&L impact.
+            </li>
+            <li class="bullet-item">
+              <strong>Enterprise Automation Integration:</strong> Integrates directly with existing robotic process automation (RPA) workflows to automatically trigger risk mitigation playbooks.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Section: Contact -->
+        <div>
+          <h3 class="col-section-header">
+            <svg style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2.5" viewBox="0 0 24 24">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            Contact & Demonstration
+          </h3>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">
+            To explore a strategic partnership or coordinate a live technical demonstration of the Plainr Sentinel dashboard, please contact:
+          </p>
+          <div class="contact-details">
+            <div class="contact-line"><strong>Contact:</strong> Mark Shepperd (Customer Advocate)</div>
+            <div class="contact-line"><strong>Email:</strong> <a href="mailto:mark@plainr.io">mark@plainr.io</a></div>
+            <div class="contact-line"><strong>Website & Demo Access:</strong> <a href="https://discover.plainr.io/main" target="_blank">discover.plainr.io/main</a></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER BANNER -->
+    <footer class="one-pager-footer">
+      <span class="footer-text">New York | Maryland</span>
+    </footer>
+
+  </main>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    // Risk Details Map for the interactive SVG cascade
+    const riskData = {
+      tier4: {
+        title: "Tier 4 Risks: Commodities",
+        desc: "Upstream commodity supply shock. Includes localized feedstock droughts, raw mineral shortages (e.g., Gallium/Lithium limits), and mining labor strikes. Unmitigated, these cascade down the chain, taking 60 days to affect OEM COGS."
+      },
+      tier3: {
+        title: "Tier 3 Risks: Processors",
+        desc: "Intermediate refinery and processing plants. High exposure to localized power shortages, chemical purification facility downtime, and regional logistical blockages that halt primary feedstock processing."
+      },
+      tier2: {
+        title: "Tier 2 Risks: Materials & Ingredients",
+        desc: "Tier 2 manufacturers converting processed materials into custom components or food ingredients. Key risks include specialized parts constraints, shipping delays, and regional regulatory compliance freezes."
+      },
+      tier1: {
+        title: "Tier 1 Risks: OEMs & Brands",
+        desc: "The final assembly or brand level. Unmitigated upstream risk arrives here as severe material shortages, resulting in massive unit-cost inflation, factory downtime, inventory write-downs, and instant margin compression."
+      }
+    };
+
+    // Show selected risk tooltip on SVG click
+    function showRisk(tierId) {
+      const card = document.getElementById('risk-card');
+      const title = document.getElementById('risk-title-text');
+      const desc = document.getElementById('risk-desc-text');
+      
+      const data = riskData[tierId];
+      if (data) {
+        title.innerText = data.title;
+        desc.innerText = data.desc;
+        card.classList.add('active');
+        
+        // Highlight active SVG pill
+        const pills = ['tier-1', 'tier-2', 'tier-3', 'tier-4'];
+        pills.forEach(id => {
+          const el = document.getElementById(id);
+          if (id === `tier-${tierId.slice(-1)}`) {
+            el.style.filter = "brightness(1.2) drop-shadow(0 0 6px var(--accent))";
+          } else {
+            el.style.filter = "none";
+          }
+        });
+      }
+    }
+
+    // Close risk popover
+    function closeRiskCard() {
+      const card = document.getElementById('risk-card');
+      card.classList.remove('active');
+      
+      // Reset SVG highlights
+      const pills = ['tier-1', 'tier-2', 'tier-3', 'tier-4'];
+      pills.forEach(id => {
+        const el = document.getElementById(id);
+        el.style.filter = "none";
+      });
+    }
+
+    // Interactive EBITDA Margin Protection Calculator formulas
+    function calculateMargin() {
+      const spend = parseFloat(document.getElementById('spend-slider').value);
+      const days = parseInt(document.getElementById('days-slider').value);
+      
+      // Render text values
+      document.getElementById('spend-val').innerText = `$${spend}M`;
+      document.getElementById('days-val').innerText = `${days} Days`;
+      
+      // High-Impact Formula: Exposure is $200k ($0.20M) per $1M spend at 60 days (the "Visibility Gap")
+      // This maps to Spend * (0.20M / 60 Days) * Days
+      const exposure = spend * (0.20 / 60) * days;
+      
+      // Plainr mitigates/neutralizes 85% of this risk through immediate alternative sourcing rules (UiPath)
+      const saved = exposure * 0.85;
+      
+      // Format text output elegantly to maximize commercial impact
+      let exposureStr = "";
+      let savedStr = "";
+      
+      if (exposure < 1.0) {
+        // Show in thousands for high-fidelity impact on smaller numbers (e.g. $200k instead of $0.20M)
+        exposureStr = `$${(exposure * 1000).toFixed(0)}k`;
+      } else {
+        exposureStr = `$${exposure.toFixed(2)}M`;
+      }
+      
+      if (saved < 1.0) {
+        savedStr = `$${(saved * 1000).toFixed(0)}k`;
+      } else {
+        savedStr = `$${saved.toFixed(2)}M`;
+      }
+      
+      // Display formatted outputs
+      document.getElementById('exposure-val').innerText = exposureStr;
+      document.getElementById('saved-val').innerText = savedStr;
+    }
+
+    // Toggle between preview views
+    function setMode(mode) {
+      const pager = document.getElementById('one-pager');
+      const btnDigital = document.getElementById('btn-digital');
+      const btnPrint = document.getElementById('btn-print');
+      
+      if (mode === 'print') {
+        document.body.classList.add('print-mode');
+        btnDigital.classList.remove('active');
+        btnPrint.classList.add('active');
+      } else {
+        document.body.classList.remove('print-mode');
+        btnPrint.classList.remove('active');
+        btnDigital.classList.add('active');
+      }
+    }
+
+    // Dark/Light mode toggle
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      const btnDark = document.getElementById('btn-dark');
+      if (document.body.classList.contains('dark-mode')) {
+        btnDark.innerText = "Toggle Light Mode";
+      } else {
+        btnDark.innerText = "Toggle Dark Mode";
+      }
+    }
+
+    // Run initial calculation
+    calculateMargin();
+  </script>
+</body>
+</html>
