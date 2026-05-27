@@ -608,6 +608,128 @@
       animation: pulse-lightning 2s infinite ease-in-out;
     }
 
+    /* Interactive Feature Showcase Widget */
+    .showcase-widget {
+      background-color: rgba(15, 23, 42, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: var(--transition-smooth);
+    }
+
+    body.dark-mode .showcase-widget {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .showcase-header {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .showcase-tabs {
+      display: flex;
+      justify-content: space-between;
+      gap: 4px;
+    }
+
+    .showcase-tab {
+      flex: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 5px 2px;
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 8.5px;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text-light);
+      transition: var(--transition-smooth);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .showcase-tab:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .showcase-tab.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+    }
+
+    .showcase-viewport {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 10px;
+      min-height: 125px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition-smooth);
+      box-shadow: inset 0 2px 4px rgba(15, 23, 42, 0.01);
+    }
+
+    body.dark-mode .showcase-viewport {
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .showcase-content-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .showcase-content-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .showcase-visualization {
+      background: rgba(15, 23, 42, 0.02);
+      border: 1px dashed var(--border-color);
+      border-radius: 4px;
+      padding: 8px;
+      font-size: 10px;
+      color: var(--text-muted);
+      min-height: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    body.dark-mode .showcase-visualization {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Print overrides for the feature showcase */
+    .print-only-features {
+      display: none;
+    }
+
     /* Print styling rules */
     @media print {
       body {
@@ -650,6 +772,35 @@
 
       .bullet-item::before {
         color: #000000 !important;
+      }
+
+      .showcase-widget {
+        display: none !important;
+      }
+
+      .print-only-features {
+        display: block !important;
+        margin-top: 12px;
+      }
+
+      .print-feature-item {
+        margin-bottom: 8px;
+        page-break-inside: avoid;
+      }
+
+      .print-feature-header {
+        font-family: 'Outfit', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        color: #000000;
+        margin-bottom: 2px;
+        text-transform: uppercase;
+      }
+
+      .print-feature-body {
+        font-size: 10px;
+        color: #333333;
+        line-height: 1.4;
       }
     }
   </style>
@@ -851,6 +1002,78 @@
               <strong>Joint Innovation Initiatives:</strong> Collaborative research, case-studies, and white papers detailing physical economy contagion risk, sector-level exposure modeling, and autonomous risk-mitigation.
             </li>
           </ul>
+        </div>
+
+        <!-- Section: Interactive Capabilities Showcase -->
+        <div>
+          <h3 class="col-section-header">
+            <svg style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2.5" viewBox="0 0 24 24">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            Interactive Capability Showcase
+          </h3>
+          
+          <div class="showcase-widget">
+            <div class="showcase-header">
+              Agentic Sentinel Control Center
+            </div>
+            
+            <div class="showcase-tabs">
+              <button class="showcase-tab active" id="tab-0" onclick="showFeature(0)">ETL Agent</button>
+              <button class="showcase-tab" id="tab-1" onclick="showFeature(1)">P&L Cascade</button>
+              <button class="showcase-tab" id="tab-2" onclick="showFeature(2)">Consolidator</button>
+              <button class="showcase-tab" id="tab-3" onclick="showFeature(3)">Ask Plainr</button>
+              <button class="showcase-tab" id="tab-4" onclick="showFeature(4)">Live Pulse</button>
+            </div>
+            
+            <div class="showcase-viewport">
+              <div class="showcase-content-title" id="showcase-title">
+                <!-- Swapped Dynamically -->
+              </div>
+              <div class="showcase-content-desc" id="showcase-desc">
+                <!-- Swapped Dynamically -->
+              </div>
+              <div class="showcase-visualization" id="showcase-viz">
+                <!-- Swapped Dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Flattened Print-Only Fallback Checklist -->
+          <div class="print-only-features">
+            <div class="print-feature-item">
+              <div class="print-feature-header">1. Agentic ETL & Data Extraction</div>
+              <div class="print-feature-body">
+                Upload your supplier agreements, POs, invoices, and Bills of Lading. Our agents extract contract values, exposure volumes, and all critical details instantly - no manual data entry, no new systems required.
+              </div>
+            </div>
+            <div class="print-feature-item">
+              <div class="print-feature-header">2. Predictive Downstream P&L Cascade</div>
+              <div class="print-feature-body">
+                See exactly how a disruption at a Tier-4 supplier cascades through your production line and hits your P&L - up to 60 days before it becomes a crisis.
+              </div>
+            </div>
+            <div class="print-feature-item">
+              <div class="print-feature-header">3. Smart Supplier Records Consolidation</div>
+              <div class="print-feature-body">
+                Automatically de-duplicate and consolidate your fragmented supplier records into a single, clean source of truth - across every site, division, and system you operate.
+              </div>
+            </div>
+            <div class="print-feature-item">
+              <div class="print-feature-header">4. Source-Cited Natural Language Q&A</div>
+              <div class="print-feature-body">
+                Ask plain-language questions about your supplier exposure, cost risks, and operational vulnerabilities. Get instant, source-cited answers drawn directly from your own contracts and live market data.
+              </div>
+            </div>
+            <div class="print-feature-item">
+              <div class="print-feature-header">5. Continuous Threat & Market Monitoring</div>
+              <div class="print-feature-body">
+                Continuously monitor commodity markets, freight indices, geopolitical events, and port disruptions - all mapped directly to your specific supplier network, not just the headlines.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1075,8 +1298,108 @@
       }
     }
 
-    // Run initial calculation
+    // Features Showcase Data
+    const featuresData = [
+      {
+        title: "Agentic ETL & Data Extraction",
+        desc: "Upload agreements, POs, invoices, and Bills of Lading. Our agents extract contract values, exposure volumes, and critical details instantly—no manual entry required.",
+        viz: `<div style="display: flex; flex-direction: column; gap: 4px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(99, 102, 241, 0.08); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(99, 102, 241, 0.2);">
+                  <span style="color: var(--accent); font-weight: bold; font-size: 8.5px;">📄 PO_99281_BOL.pdf</span>
+                  <span style="font-size: 8px; padding: 2px 6px; background: #22C55E; color: white; border-radius: 99px; font-family: sans-serif; font-weight: 600;">EXTRACTED</span>
+                </div>
+                <div style="font-family: monospace; font-size: 9.5px; padding: 4px; line-height: 1.3; color: var(--text-muted);">
+                  <span>• Supplier:</span> "Apex Chemical Corp"<br>
+                  <span>• Material:</span> Benzene Feedstock (Tier 4)<br>
+                  <span>• Value:</span> $1,420,000 &nbsp;&nbsp;&nbsp;&nbsp; <span style="color: #22C55E; font-weight: bold;">[Accuracy: 99.8%]</span>
+                </div>
+              </div>`
+      },
+      {
+        title: "Predictive P&L Cascade Analysis",
+        desc: "See exactly how a disruption at a Tier-4 supplier cascades through your production line and hits your P&L—up to 60 days before it becomes a crisis.",
+        viz: `<div style="display: flex; flex-direction: column; gap: 4px; font-family: sans-serif;">
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 9px;">
+                  <span style="background: var(--tier4-red); color: white; padding: 1px 4px; border-radius: 3px; font-weight: bold;">T4 Shock</span>
+                  <span style="color: var(--text-dark); font-weight: 600;">India Port Strike (Day 0)</span>
+                </div>
+                <div style="margin-left: 12px; border-left: 1px dashed var(--border-color); padding-left: 8px; font-size: 8.5px; display: flex; flex-direction: column; gap: 3px; margin-top: 2px;">
+                  <div style="color: var(--text-light);">↳ <span style="color: var(--text-dark); font-weight: 600;">T3 Refiner (Germany):</span> 22-day safety buffer</div>
+                  <div style="color: var(--text-light);">↳ <span style="color: var(--text-dark); font-weight: 600;">T2 Ohio Extruder:</span> Resin stockout in 37 days</div>
+                  <div style="color: var(--tier4-red); font-weight: bold;">↳ OEM Production Impact: Day 60 (EBITDA: -$320k)</div>
+                </div>
+              </div>`
+      },
+      {
+        title: "Smart Supplier Records Consolidation",
+        desc: "Automatically de-duplicate and consolidate fragmented supplier records into a single, clean source of truth across every site, division, and system you operate.",
+        viz: `<div style="display: flex; flex-direction: column; gap: 4px; font-family: sans-serif;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                  <span style="font-size: 9.5px; font-weight: 700; color: var(--text-dark);">Master ID: VND-4089</span>
+                  <span style="font-size: 8px; font-weight: 700; color: var(--accent); background: rgba(99, 102, 241, 0.1); padding: 1px 6px; border-radius: 4px;">CONSOLIDATED</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 8.5px;">
+                  <div style="background: rgba(15, 23, 42, 0.04); padding: 4px; border-radius: 4px; border: 1px solid var(--border-color); text-decoration: line-through; opacity: 0.6; color: var(--text-light);">
+                    Apex Chemicals LLC<br>Apex Chem Inc.
+                  </div>
+                  <div style="background: rgba(99, 102, 241, 0.04); padding: 4px; border-radius: 4px; border: 1px dashed var(--accent); color: var(--text-dark); font-weight: 600;">
+                    Apex Chemical Corp<br><span style="font-size: 7.5px; font-weight: normal; color: var(--text-light);">DUNS: 08-992-1209</span>
+                  </div>
+                </div>
+              </div>`
+      },
+      {
+        title: "Source-Cited Natural Language Q&A",
+        desc: "Ask plain-language questions about your supplier exposure, cost risks, and operational vulnerabilities. Get instant, source-cited answers.",
+        viz: `<div style="display: flex; flex-direction: column; gap: 4px; font-family: sans-serif; font-size: 9px;">
+                <div style="align-self: flex-end; background: var(--accent); color: white; padding: 4px 8px; border-radius: 8px 8px 0 8px; max-width: 90%;">
+                  "Which plants are exposed to the Suez Canal disruptions?"
+                </div>
+                <div style="align-self: flex-start; background: rgba(15, 23, 42, 0.03); color: var(--text-dark); padding: 4px 8px; border-radius: 8px 8px 8px 0; max-width: 90%; border: 1px solid var(--border-color); margin-top: 2px;">
+                  Plant #4 (Cleveland) is exposed. It relies on Apex Chem's European deliveries. <br>
+                  <span style="font-size: 8px; color: var(--accent); font-weight: 600; display: inline-block; margin-top: 2px;">[Source: Contract Apex-PO-2026]</span>
+                </div>
+              </div>`
+      },
+      {
+        title: "Continuous Threat & Market Monitoring",
+        desc: "Monitor commodity markets, freight indices, geopolitical events, and port disruptions—all mapped directly to your specific supplier network.",
+        viz: `<div style="display: flex; flex-direction: column; gap: 3px; font-family: sans-serif; font-size: 9px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(239, 68, 68, 0.04); padding: 4px 6px; border-radius: 4px; border-left: 2px solid var(--tier4-red);">
+                  <span style="font-weight: 600; color: var(--text-dark);">Rotterdam Congestion Index</span>
+                  <span style="color: var(--tier4-red); font-weight: bold;">+18.4%</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(139, 92, 246, 0.04); padding: 4px 6px; border-radius: 4px; border-left: 2px solid var(--tier3-violet);">
+                  <span style="font-weight: 600; color: var(--text-dark);">LME Copper Index</span>
+                  <span style="color: var(--tier3-violet); font-weight: bold;">$9,450/mt (+2.1%)</span>
+                </div>
+              </div>`
+      }
+    ];
+
+    function showFeature(index) {
+      // Set active tab class
+      for (let i = 0; i < featuresData.length; i++) {
+        const tab = document.getElementById('tab-' + i);
+        if (tab) {
+          if (i === index) {
+            tab.classList.add('active');
+          } else {
+            tab.classList.remove('active');
+          }
+        }
+      }
+      
+      // Update viewport content
+      document.getElementById('showcase-title').innerHTML = `
+        <span style="color: var(--accent); font-weight: 700;">✦</span> ` + featuresData[index].title;
+      document.getElementById('showcase-desc').innerText = featuresData[index].desc;
+      document.getElementById('showcase-viz').innerHTML = featuresData[index].viz;
+    }
+
+    // Run initial calculations
     calculateMargin();
+    showFeature(0);
   </script>
 </body>
 </html>
